@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Lutemon</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="name">Name</string>
+    <string name="give_me_epic_name">Can give a name here</string>
+    <string name="example">1: Pink(Pinky) att: 7; def: 2; exp:0; health: 18/18\n 2: Black(Black Knight) att: 9; def: 0; exp:0; health: 16/16\n Pink(Pinky) attacks Black(Black Knight)\n Black(Black Knight) manages to escape death.\n 2: Black(Black Knight) att: 9; def: 0; exp:0; health: 9/16\n 1: Pink(Pinky) att: 7; def: 2; exp:0; health: 18/18\n Black(Black Knight) attacks Pink(Pinky)\n Pink(Pinky) manages to escape death.\n 1: Pink(Pinky) att: 7; def: 2; exp:0; health: 11/18\n 2: Black(Black Knight) att: 9; def: 0; exp:0; health: 9/16\n Pink(Pinky) attacks Black(Black Knight)\n Black(Black Knight) manages to escape death.\n ....</string>
+    <string name="home">HOME</string>
+    <string name="transfer">TRANSFER</string>
+    <string name="train">TRAIN</string>
+    <string name="battle">BATTLE</string>
+    <string name="content_description">blue</string>
+    <string name="create_new_lutemon">CREATE NEW LUTEMON</string>
+    <string name="list">LIST</string>
+    <string name="sort">SORT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="battle_field">Battle Field</string>
+    <string name="train_field">Train Field</string>
+    <string name="select_lutemons_to_transfer_to">Select lutemons to transfer to</string>
+    <string name="something">something</string>
+</resources>

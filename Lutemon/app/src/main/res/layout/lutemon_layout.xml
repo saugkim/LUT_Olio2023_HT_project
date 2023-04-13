@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_for_lutemon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageViewLutemon"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        app:srcCompat="@mipmap/pink_back" />
+
+    <TextView
+        android:id="@+id/lutemonInfo"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_weight="2"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Epic [Pink]\n\nAttack: 7\nDefence: 2\nHeath: 3/15\nXP: 3"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</LinearLayout>

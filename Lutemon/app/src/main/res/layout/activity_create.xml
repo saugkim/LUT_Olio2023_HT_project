@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+            <RadioButton
+                android:id="@+id/whiteButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_create"
+                android:text="WHITE    (CP 5: DP 4: HP 20)"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/greenButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_create"
+                android:text="GREEN    (CP 6: DP 3: HP 19)" />
+
+            <RadioButton
+                android:id="@+id/pinkButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_create"
+                android:text="PINK       (CP 7: DP 2: HP 18)" />
+
+            <RadioButton
+                android:id="@+id/orangeButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_create"
+                android:text="ORANGE  (CP 8: DP 1: HP 17)" />
+
+            <RadioButton
+                android:id="@+id/blackButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_create"
+                android:text="BLACK     (CP 9: DP 0: HP 16)" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/height_create"
+                android:layout_height="@dimen/height_create"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/white" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/height_create"
+                android:layout_height="@dimen/height_create"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/green_back" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="@dimen/height_create"
+                android:layout_height="@dimen/height_create"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/pink_back" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="@dimen/height_create"
+                android:layout_height="@dimen/height_create"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/oragne_back" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="@dimen/height_create"
+                android:layout_height="@dimen/height_create"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/black_back" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:inputType="text"
+        android:hint="@string/give_me_epic_name"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        tools:ignore="Autofill" />
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/create_new_lutemon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+    <ImageView
+        android:id="@+id/imageViewTemp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreate"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnHome"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#FFEB3B"
+        android:clickable="true"
+        android:contentDescription="@string/content_description"
+        app:backgroundTint="@color/teal_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="42dp"
+        app:srcCompat="@mipmap/icons8home48" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

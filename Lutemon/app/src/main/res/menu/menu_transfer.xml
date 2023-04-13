@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ht.lutemon.TransferActivity">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@mipmap/icons8home48"
+        android:title="@string/home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_train"
+        android:title="@string/train"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_battle"
+        android:title="@string/battle"
+        app:showAsAction="ifRoom" />
+
+</menu>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#F6D7D7"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/pink_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="2"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Epic [Pink]\n\nAttack: 7\nDefence: 2\nHeath: 3/15\nXP: 3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="#EDF3EA"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/green_back" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="2"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Rauha [Green]\n\nAttack: 8\nDefence: 3\nHeath: 15/18\nXP: 1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#E8E6E6"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/black_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="2"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Mirri [Musta]\n\nAttack: 5\nDefence: 0\nHeath: 15/15\nXP: 0"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#E8E6E6"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/black_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="2"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Mirri [Musta]\n\nAttack: 5\nDefence: 0\nHeath: 15/15\nXP: 0"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
