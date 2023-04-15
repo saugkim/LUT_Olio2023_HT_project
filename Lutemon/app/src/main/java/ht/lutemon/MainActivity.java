@@ -15,16 +15,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //LutemonStorage.getInstance().load(this);
+        Helper.load(this);
+        Lutemon.
+
         buttonCreate = findViewById(R.id.buttonCreate);
         buttonTransfer = findViewById(R.id.buttonTransfer);
         buttonTrain = findViewById(R.id.buttonTrain);
         buttonBattle = findViewById(R.id.buttonBattle);
         buttonList = findViewById(R.id.buttonList);
 
+        //buttonBattle.setOnClickListener(v->LutemonStorage.getInstance().removeAll());
         buttonBattle.setOnClickListener(v-> startActivity(new Intent(this, BattleActivity.class)));
         buttonCreate.setOnClickListener(v-> startActivity(new Intent(this, CreateActivity.class)));
         buttonTrain.setOnClickListener(v->startActivity(new Intent(this, TrainActivity.class)));
         buttonTransfer.setOnClickListener(v->startActivity(new Intent(this, TransferActivity.class)));
         buttonList.setOnClickListener(v-> startActivity(new Intent(this, ListActivity.class)));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //LutemonStorage.getInstance().save(this);
     }
 }

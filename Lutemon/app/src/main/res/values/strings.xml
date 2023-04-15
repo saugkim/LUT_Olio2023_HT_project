@@ -20,4 +20,5 @@
     <string name="train_field">Train Field</string>
     <string name="select_lutemons_to_transfer_to">Select lutemons to transfer to</string>
     <string name="something">something</string>
+    <string name="start_train">start train</string>
 </resources>

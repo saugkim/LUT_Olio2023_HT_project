@@ -52,6 +52,8 @@ public class TransferActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_transfer, menu);

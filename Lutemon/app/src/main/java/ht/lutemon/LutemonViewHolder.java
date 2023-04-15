@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
+    Lutemon mLutemon;
     LinearLayout layout;
     ImageView imageView;
     TextView textView;
@@ -23,9 +24,16 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
         layout = (LinearLayout) itemView.findViewById(R.id.layout_for_lutemon);
         imageView = itemView.findViewById(R.id.imageViewLutemon);
         textView = itemView.findViewById(R.id.lutemonInfo);
+
+        itemView.setOnLongClickListener(v->{
+           LutemonStorage.getInstance().removeLutemon(mLutemon);
+           Helper.save(v.getContext());
+           return true;
+        });
     }
 
     public void bind(Lutemon lutemon) {
+        mLutemon = lutemon;
         imageView.setImageResource(lutemon.getImageSource());
         textView.setText(lutemon.toString());
         layout.setBackgroundColor(lutemon.getBackground_color());

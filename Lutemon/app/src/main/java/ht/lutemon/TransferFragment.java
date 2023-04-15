@@ -72,10 +72,10 @@ public class TransferFragment extends Fragment {
 
         mons = getListOfLutemonInThisField(field);
         for (Lutemon lutemon : mons) {
-            addCheckboxElement(lutemon.oneLineInfo(), view);
+            addCheckboxElement(lutemon.shortInfo(), view);
         }
         //textView.setText(String.format("Current Lutemons at %s", field));
-        addRadioButton(field, view);
+        addRadioButton(view);
         buttonTransfer.setOnClickListener(v-> {
             System.out.println("do something");
         });
@@ -87,20 +87,16 @@ public class TransferFragment extends Fragment {
 
         switch (field) {
             case "HOME":
-                lutemons.add(new White());
-                lutemons.add(new Green());
-                break;
+                return HomeStorage.getInstance().getLutemons();
             case "TRAIN FIELD":
-                lutemons.add(new Black());
-                break;
+                return TrainStorage.getInstance().getLutemons();
             case "BATTLE FIELD":
-                lutemons.add(new Orange());
-                lutemons.add(new Pink());
-                break;
+//                lutemons.add(new Orange());
+//                lutemons.add(new Pink());
+                return BattleStorage.getInstance().getLutemons();
             default:
-                break;
+                return lutemons;
         }
-        return lutemons;
     }
     private void addCheckboxElement(String info, View view) {
         CheckBox checkBox = new CheckBox(view.getContext());
@@ -108,7 +104,7 @@ public class TransferFragment extends Fragment {
         linearLayout.addView(checkBox);
     }
 
-    private void addRadioButton(String field, View view) {
+    private void addRadioButton(View view) {
         for (String s : fields) {
             if (!s.equals(field)) {
                 RadioButton button = new RadioButton(view.getContext());

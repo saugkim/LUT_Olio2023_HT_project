@@ -70,6 +70,8 @@ public class CreateActivity extends AppCompatActivity {
 
         imageViewForTest.setImageResource(lutemon.getImageSource());
         imageViewForTest.setBackgroundColor(lutemon.getBackground_color());
+
+        LutemonStorage.getInstance().save(this);
     }
 
     private Lutemon createLutemon(int index) {

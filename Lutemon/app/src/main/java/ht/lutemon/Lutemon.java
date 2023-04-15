@@ -1,8 +1,12 @@
 package ht.lutemon;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import java.io.Serializable;
 import java.util.Locale;
 
-public class Lutemon {
+public class Lutemon implements Serializable {
 
     int id;
     String name;
@@ -15,8 +19,25 @@ public class Lutemon {
     int xp;
     int imageSource;
 
-    public Lutemon() {
+    String arena;
 
+    public Lutemon() {
+        int idCounter = Helper.getMaxID();
+        Log.d("ZZ lutemon", "idCounter: " + idCounter );
+
+        id = ++idCounter;
+        arena = Arena.HOME.name();
+        xp = 0;
+        currentHealth = maxHealth;
+        Log.d("ZZ Lutemon", "constructor id = " + id);
+    }
+
+    public String getArena() {
+        return arena;
+    }
+
+    public void setArena(String arena) {
+        this.arena = arena;
     }
 
     public int getImageSource() {
@@ -74,15 +95,22 @@ public class Lutemon {
         this.xp = xp;
     }
 
-    public String statString() {
+
+    public String statLongInfo() {
         return String.format(Locale.getDefault(),
                 "Attack: %d\nDefence: %d\nHealth: %d/%d\nXP: %d",
                 attack, defence, currentHealth, maxHealth, xp);
     }
 
-    public String oneLineInfo() {
+    public String shortInfo() {
         return String.format(Locale.getDefault(),
                 "%s [%s] CP %d, DP %d, HP %d/%d, XP %d",
-                 name, team.toUpperCase(),attack, defence, currentHealth, maxHealth, xp);
+                 name, team.toUpperCase(), attack, defence, currentHealth, maxHealth, xp);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("%s [%s]\n\n%s", name, team, this.statLongInfo());
     }
 }
