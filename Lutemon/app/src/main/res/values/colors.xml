@@ -12,6 +12,8 @@
     <color name="lutemon_pink_background">#F6D7D7</color>
     <color name="lutemon_orange_background">#F6EAD7</color>
     <color name="lutemon_black_background">#E8E6E6</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="edit_style_background">#ECF1F1</color>
 
 
 

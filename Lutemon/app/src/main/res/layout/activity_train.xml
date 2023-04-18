@@ -27,8 +27,8 @@ tools:context=".TrainActivity">
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,48 +40,13 @@ tools:context=".TrainActivity">
                 android:layout_height="30dp"
                 android:text="Select ONE lutemon to train"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <RadioGroup
+                android:id="@+id/radioGroupTrain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Musti [Black]" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Miiri [White]" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pinkku [Pink]" />
-
-                <RadioButton
-                    android:id="@+id/radioButton4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Oranssi [Orange]" />
-
-                <RadioButton
-                    android:id="@+id/radioButton5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Epic [Black]" />
-
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Rauha [Green]" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
@@ -96,9 +61,7 @@ tools:context=".TrainActivity">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline">
 
-
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:text="Select an opponent to train with"
@@ -152,17 +115,16 @@ tools:context=".TrainActivity">
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:srcCompat="@mipmap/black_back" />
-
-
         </LinearLayout>
 
         <RadioGroup
+            android:id="@+id/opponent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton7"
+                android:id="@+id/White"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -170,7 +132,7 @@ tools:context=".TrainActivity">
                 android:drawableTop="?android:attr/listChoiceIndicatorSingle" />
 
             <RadioButton
-                android:id="@+id/radioButton8"
+                android:id="@+id/Green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -179,7 +141,7 @@ tools:context=".TrainActivity">
                 android:gravity="center" />
 
             <RadioButton
-                android:id="@+id/radioButton9"
+                android:id="@+id/Pink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -187,7 +149,7 @@ tools:context=".TrainActivity">
                 android:drawableTop="?android:attr/listChoiceIndicatorSingle" />
 
             <RadioButton
-                android:id="@+id/radioButton10"
+                android:id="@+id/Orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -195,7 +157,7 @@ tools:context=".TrainActivity">
                 android:drawableTop="?android:attr/listChoiceIndicatorSingle" />
 
             <RadioButton
-                android:id="@+id/radioButton11"
+                android:id="@+id/Black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -204,14 +166,14 @@ tools:context=".TrainActivity">
         </RadioGroup>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnStartBattle"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:layout_margin="40dp"
+            android:layout_margin="10dp"
             android:text="@string/start_train" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvBattleResult"
             android:layout_width="match_parent"
             android:layout_height="92dp"
             android:gravity="center"

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class CreateActivity extends AppCompatActivity {
 
+    private static String TAG = "ZZ Create Activity";
     RadioGroup radioGroup;
     Button buttonCreate;
     EditText editText;
@@ -71,7 +72,11 @@ public class CreateActivity extends AppCompatActivity {
         imageViewForTest.setImageResource(lutemon.getImageSource());
         imageViewForTest.setBackgroundColor(lutemon.getBackground_color());
 
-        LutemonStorage.getInstance().save(this);
+        //LutemonStorage.getInstance().save(this);
+
+        LutemonRepository repository = new LutemonRepository(getApplication());
+        repository.insert(lutemon);
+        Log.d(TAG, "inserted: " + lutemon.getId());
     }
 
     private Lutemon createLutemon(int index) {
@@ -105,7 +110,6 @@ public class CreateActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_create, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

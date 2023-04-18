@@ -45,6 +45,10 @@ public class LutemonStorage {
         lutemons.clear();
     }
 
+    public void update(int index, Lutemon lutemon) {
+        lutemons.set(index, lutemon);
+    }
+
     public void load(Context context) {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(context.openFileInput(Helper.FILE_NAME));

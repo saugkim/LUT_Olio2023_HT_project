@@ -10,9 +10,10 @@ public class Black extends Lutemon implements Serializable {
         background_color = 0xFFE8E6E6;
         imageSource = R.mipmap.black_back;
         name = "Legendary Musta";
-        team = Team.BLACK.name();
+        team = Team.BLACK.toString();
         attack = 9;
         defence = 0;
         maxHealth = 16;
+        currentHealth = maxHealth;
     }
 }

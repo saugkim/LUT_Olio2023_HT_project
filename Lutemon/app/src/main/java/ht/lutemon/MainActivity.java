@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //LutemonStorage.getInstance().load(this);
-        Helper.load(this);
-        Lutemon.
+        //Helper.load(this);
 
         buttonCreate = findViewById(R.id.buttonCreate);
         buttonTransfer = findViewById(R.id.buttonTransfer);

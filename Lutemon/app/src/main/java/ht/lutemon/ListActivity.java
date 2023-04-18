@@ -1,6 +1,7 @@
 package ht.lutemon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,17 +14,23 @@ public class ListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     LutemonAdapter adapter;
-
+    LutemonListAdapter listAdapter;
+    LutemonViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
         recyclerView = findViewById(R.id.recyclerView);
-
-        adapter = new LutemonAdapter(LutemonStorage.getInstance().getLutemons());
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+//        adapter = new LutemonAdapter(LutemonStorage.getInstance().getLutemons(), this);
+//        recyclerView.setAdapter(adapter);
+
+        listAdapter = new LutemonListAdapter(new LutemonListAdapter.ItemDiff());
+        viewModel = new ViewModelProvider(this).get(LutemonViewModel.class);
+        viewModel.getAllLutemons().observe(this, listAdapter::submitList);
+        recyclerView.setAdapter(listAdapter);
     }
 
 

@@ -1,46 +1,36 @@
 package ht.lutemon;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Locale;
 
-@Entity(tableName="Lutemons")
-public class Lutemon implements Cloneable, Serializable {
+public class LutemonX implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
-    @ColumnInfo(name="name")
+    int id;
     String name;
-
-    @ColumnInfo(name="backColor")
     int background_color;
-
-    @ColumnInfo(name="team")
     String team;
-    @ColumnInfo(name="attack")
     int attack;
-    @ColumnInfo(name="defence")
     int defence;
-    @ColumnInfo(name="currentHealth")
     int currentHealth;
-    @ColumnInfo(name="maxHealth")
     int maxHealth;
-    @ColumnInfo(name="xp")
     int xp;
-    @ColumnInfo(name="icon")
     int imageSource;
 
-    @ColumnInfo(name="arena")
     String arena;
 
-    public Lutemon() {
+    public LutemonX() {
+        int idCounter = Helper.getMaxID();
+        Log.d("ZZ lutemon", "idCounter: " + idCounter );
+
+        id = ++idCounter;
         arena = Arena.HOME.name();
         xp = 0;
+        currentHealth = maxHealth;
+        Log.d("ZZ Lutemon", "constructor id = " + id);
     }
 
     public String getArena() {
@@ -65,14 +55,6 @@ public class Lutemon implements Cloneable, Serializable {
 
     public int getAttack() {
         return attack;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-    }
-
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
     }
 
     public int getBackground_color() {
@@ -115,7 +97,7 @@ public class Lutemon implements Cloneable, Serializable {
     }
 
 
-    public String statMultilineInfo() {
+    public String statLongInfo() {
         return String.format(Locale.getDefault(),
                 "Attack: %d\nDefence: %d\nHealth: %d/%d\nXP: %d",
                 attack, defence, currentHealth, maxHealth, xp);
@@ -123,38 +105,13 @@ public class Lutemon implements Cloneable, Serializable {
 
     public String shortInfo() {
         return String.format(Locale.getDefault(),
-                "%s [%s] CP: %d DP: %d HP: %d/%d XP: %d",
+                "%s [%s] CP %d, DP %d, HP %d/%d, XP %d",
                  name, team.toUpperCase(), attack, defence, currentHealth, maxHealth, xp);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return String.format("%s [%s]\n\n%s", name, team, this.statMultilineInfo());
-    }
-
-    @NonNull
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    public String battleOutputFormat() {
-        return String.format(Locale.getDefault(),
-                "%d: %s(%s) att: %d; def: %d; exp:% d; health: %d/%d\n",
-                id, team, name, attack, defence, xp, currentHealth, maxHealth);
-    }
-
-    public String attack(Lutemon opponent) {
-
-        String ret = this.battleOutputFormat() + opponent.battleOutputFormat() +
-                String.format(Locale.getDefault(),
-                        "%s(%s) attacks %s(%s)\n",
-                        this.team, this.name, opponent.getTeam(), opponent.getName());
-
-        int damage = (this.attack + this.xp);
-        opponent.setCurrentHealth(opponent.getCurrentHealth() + opponent.getDefence() - damage);
-
-        return ret;
+        return String.format("%s [%s]\n\n%s", name, team, this.statLongInfo());
     }
 }

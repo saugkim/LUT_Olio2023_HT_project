@@ -11,15 +11,16 @@ public class Pink extends Lutemon implements Serializable {
         background_color = 0xFFF6D7D7;
         imageSource = R.mipmap.pink_back;
         name = "Mythic Pinky";
-        team = Team.PINK.name();
+        team = Team.PINK.toString();
         attack = 7;
         defence = 2;
         maxHealth = 18;
+        currentHealth = maxHealth;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return String.format("%s [%s]\n\n%s", name, team, this.statLongInfo());
+        return String.format("%s [%s]\n\n%s", name, team, this.statMultilineInfo());
     }
 }

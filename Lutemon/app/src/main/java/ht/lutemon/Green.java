@@ -10,15 +10,16 @@ public class Green extends Lutemon implements Serializable {
         background_color = 0xFFEDF3EA;
         imageSource = R.mipmap.green_back;
         name = "Rare Green";
-        team = Team.GREEN.name();
+        team = Team.GREEN.toString();
         attack = 6;
         defence = 3;
         maxHealth = 19;
+        currentHealth = maxHealth;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return String.format("%s [%s]\n\n%s", name, team, this.statLongInfo());
+        return String.format("%s [%s]\n\n%s", name, team, this.statMultilineInfo());
     }
 }

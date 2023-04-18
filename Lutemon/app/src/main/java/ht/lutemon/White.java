@@ -10,15 +10,16 @@ public class White extends Lutemon implements Serializable {
         background_color = 0xFFF6F6FB;
         imageSource = R.mipmap.white_back;
         name = "Snow White";
-        team = Team.WHITE.name();
+        team = Team.WHITE.toString();
         attack = 5;
         defence = 4;
         maxHealth = 20;
+        currentHealth = maxHealth;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return String.format("%s [%s]\n\n%s", name, team, this.statLongInfo());
+        return String.format("%s [%s]\n\n%s", name, team, this.statMultilineInfo());
     }
 }
