@@ -7,16 +7,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 public class LutemonStorage {
 
     ArrayList<Lutemon> lutemons;
+    ArrayList<Lutemon> lutemonsInBattles;
+    ArrayList<Lutemon> lutemonsInTrain;
+    ArrayList<Lutemon> lutemonsAtHome;
     private static LutemonStorage storage = null;
 
+    private static final String FILE_NAME = "lut_ht_lutemon.data";
     private static String TAG = "ZZ lutemonStorage: ";
     protected LutemonStorage() {
         lutemons = new ArrayList<>();
+        lutemonsInBattles = new ArrayList<>();
+        lutemonsInTrain = new ArrayList<>();
+        lutemonsAtHome = new ArrayList<>();
     }
 
     public static LutemonStorage getInstance() {
@@ -25,7 +33,16 @@ public class LutemonStorage {
         }
         return storage;
     }
+    public ArrayList<Lutemon> getLutemonsAtHome() {
+        return lutemonsAtHome;
+    }
 
+    public ArrayList<Lutemon> getLutemonsInBattles() {
+        return lutemonsInBattles;
+    }
+    public ArrayList<Lutemon> getLutemonsInTrain() {
+        return lutemonsInTrain;
+    }
     public ArrayList<Lutemon> getLutemons() {
         return lutemons;
     }
@@ -51,7 +68,7 @@ public class LutemonStorage {
 
     public void load(Context context) {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(context.openFileInput(Helper.FILE_NAME));
+            ObjectInputStream objectInputStream = new ObjectInputStream(context.openFileInput(FILE_NAME));
             //noinspection unchecked
             lutemons = (ArrayList<Lutemon>) objectInputStream.readObject();
             objectInputStream.close();
@@ -70,7 +87,7 @@ public class LutemonStorage {
     }
     public void save(Context context) {
         try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(context.openFileOutput(Helper.FILE_NAME, Context.MODE_PRIVATE));
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE));
             objectOutputStream.writeObject(LutemonStorage.getInstance().getLutemons());
             objectOutputStream.close();
             Log.d(TAG, "save data to file");
@@ -78,5 +95,34 @@ public class LutemonStorage {
             Log.d(TAG, "save data to file failed");
             e.printStackTrace();
         }
+    }
+
+
+    public void loadAll() {
+        for (Lutemon lutemon : LutemonStorage.getInstance().getLutemons()) {
+            if (lutemon.getArena().equals(Arena.HOME.name())) {
+                lutemonsAtHome.add(lutemon);
+            } else if (lutemon.getArena().equals(Arena.TRAIN.name())) {
+                lutemonsInTrain.add(lutemon);
+            } else {
+                lutemonsInBattles.add(lutemon);
+            }
+        }
+    }
+
+    public int getMaxID() {
+        ArrayList<Lutemon> lutemons = LutemonStorage.getInstance().getLutemons();
+
+        if (lutemons.size() == 0) {
+            return 0;
+        }
+        int maxId = -1;
+        for (int i = 0; i < lutemons.size(); i++) {
+            if (lutemons.get(i).getId() > maxId) {
+                maxId = lutemons.get(i).getId();
+            }
+        }
+        Log.d(TAG, "max id? " + maxId);
+        return maxId;
     }
 }

@@ -15,9 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //LutemonStorage.getInstance().load(this);
-        //Helper.load(this);
-
         buttonCreate = findViewById(R.id.buttonCreate);
         buttonTransfer = findViewById(R.id.buttonTransfer);
         buttonTrain = findViewById(R.id.buttonTrain);
@@ -30,11 +27,5 @@ public class MainActivity extends AppCompatActivity {
         buttonTrain.setOnClickListener(v->startActivity(new Intent(this, TrainActivity.class)));
         buttonTransfer.setOnClickListener(v->startActivity(new Intent(this, TransferActivity.class)));
         buttonList.setOnClickListener(v-> startActivity(new Intent(this, ListActivity.class)));
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //LutemonStorage.getInstance().save(this);
     }
 }

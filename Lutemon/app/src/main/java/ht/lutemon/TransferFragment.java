@@ -170,20 +170,6 @@ public class TransferFragment extends Fragment {
                 break;
         }
     }
-
-    public ArrayList<Lutemon> getListOfLutemonInThisField(String field) {
-        ArrayList<Lutemon> lutemons = new ArrayList<>();
-        switch (field) {
-            case "HOME":
-                return HomeStorage.getInstance().getLutemons();
-            case "TRAIN FIELD":
-                return TrainStorage.getInstance().getLutemons();
-            case "BATTLE FIELD":
-                return BattleStorage.getInstance().getLutemons();
-            default:
-                return lutemons;
-        }
-    }
     private void addCheckboxElement(String info, int id) {
         CheckBox checkBox = new CheckBox(getContext());
         checkBox.setText(info);
@@ -222,6 +208,21 @@ public class TransferFragment extends Fragment {
                 Log.d(TAG, "checkBox id: " + cb.getId());
                 lutemonIndexes.add(cb.getId());
             }
+        }
+    }
+
+    //will be deleted soon
+    public ArrayList<Lutemon> getListOfLutemonInThisField(String field) {
+        ArrayList<Lutemon> lutemons = new ArrayList<>();
+        switch (field) {
+            case "HOME":
+                return LutemonStorage.getInstance().getLutemonsAtHome();
+            case "TRAIN FIELD":
+                return LutemonStorage.getInstance().getLutemonsInTrain();
+            case "BATTLE FIELD":
+                return LutemonStorage.getInstance().getLutemonsInBattles();
+            default:
+                return lutemons;
         }
     }
 

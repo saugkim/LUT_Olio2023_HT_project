@@ -43,7 +43,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonViewHolder> {
 
         holder.layout.setOnLongClickListener(v-> {
             LutemonStorage.getInstance().removeLutemon(lutemon);
-            Helper.save(context);
+            LutemonStorage.getInstance().save(context);
             notifyItemRemoved(position);
             return true;
         });
@@ -71,7 +71,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonViewHolder> {
                         lutemon.setName(text);
                         //int index = Collections.singletonList(lutemons).indexOf(lutemon);
                         //LutemonStorage.getInstance().update(position, lutemon);
-                        Helper.save(context);
+                        LutemonStorage.getInstance().save(context);
                         notifyItemChanged(position);
                     }
                     dialog.dismiss();
