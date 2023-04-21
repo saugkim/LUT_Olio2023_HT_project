@@ -1,12 +1,11 @@
-App: Lutemon v1.0 for android device 
+App: Lutemon v1.0 
 
-Date: 21.4.2023
+Tool: Android studio (Electric Eel 2022.1.1 Patch 1)
 
-Developer: Group 11 (alone)
+Test device: Virtual device, Android 10(Q) API 29
 
-Test device: Virtual device (Android Q29)
 
-Dependency:  
+Dependency: (additionally) 
   - implementation 'androidx.room:room-runtime:2.5.1'
   - annotationProcessor 'androidx.room:room-compiler:2.5.1'
 
