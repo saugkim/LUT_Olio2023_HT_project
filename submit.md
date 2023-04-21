@@ -98,9 +98,7 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
    - user cannot transfer to other arena in this view
 
 
+
 ### BattleActivity    
 
-![battle1](https://user-images.githubusercontent.com/25344978/233725715-4bf2aec7-8930-4d60-9181-960e0156bcea.png)
-![battle1_result](https://user-images.githubusercontent.com/25344978/233725732-c809063a-adda-4db3-ba92-2452d0e2d1da.png)
-![battle2](https://user-images.githubusercontent.com/25344978/233725752-79ab12d2-a9da-4f81-9556-05e8b07b1692.png)
-![battle2_result](https://user-images.githubusercontent.com/25344978/233725770-47cf7f53-f426-4acc-8521-807c293845be.png)
+
