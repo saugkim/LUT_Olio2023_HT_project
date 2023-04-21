@@ -23,7 +23,3 @@ Lisää tähän tekstikenttään tiedot
 Huomaa, että voit lähettää nämä tiedot vain kerran!
 
 
-
-..Tool: Android studio (Electric Eel 2022.1.1 Patch 1)
-
-Test device: Virtual device, Android 10(Q) API 29
