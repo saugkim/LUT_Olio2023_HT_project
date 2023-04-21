@@ -65,8 +65,42 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 
 |Home view|Train view|Battle view| 
 |-|-|-|
-|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233722089-faa33b43-2858-4e64-a870-df40a64e2d08.png" width=200> </kbd>|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233722098-d5c2560c-d279-4eb1-a3f1-f6a8d1d12fc9.png" width=200> </kbd> | <img src="https://user-images.githubusercontent.com/25344978/233722133-6c3bbf91-7a6f-4cc2-b52d-47fb03309dd7.png" width="200"> |
+|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233722089-faa33b43-2858-4e64-a870-df40a64e2d08.png" width=200> </kbd>|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233722098-d5c2560c-d279-4eb1-a3f1-f6a8d1d12fc9.png" width=200> </kbd> |<kbd> <img src="https://user-images.githubusercontent.com/25344978/233722133-6c3bbf91-7a6f-4cc2-b52d-47fb03309dd7.png" width="200"> </kbd>|
+
+   - This activity implemented using fragment
+   - TabLayout and ViewPager2 is used to implement fragmentation
+   - 3 views using one fragment layout (they have exactly same struncture)
+   - in each view, there is list of lutemons at current arena on top
+   - there is list of arena (2 for each view) to transfer to 
+   - button click event to transfer selected lutemons to selected arena
+   - user must select at least one lutemon and one arena (otherwise nothing happens)
+   - lutemons transfered to Home will recover their health to maximum level 
+   - user can directly move to MainActivity and Train or BattleAcitivity to train or to battle
+   - ViewModel is implemented to update data - like currenthealth transfered to Home arena 
+      
+
+### TrainAcitivy
+
+|Before Train|Win|Lose| 
+|-|-|-|
+|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233725981-89a39146-6685-47f3-854e-4774e935e849.png" width=200> </kbd>|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233725989-bd9b8eee-e2d2-4018-8af9-1feff936e047.png" width=200> </kbd> |<kbd> <img src="https://user-images.githubusercontent.com/25344978/233725997-c756e8fa-c642-4972-914b-6883fe4e1a82.png" width=200> </kbd>|
+
+   - user can select any one of lutemons in train arena (must select ONE to train)
+   - user can select any one of opponent in the list (represent of color)
+   - selected opponent will have same xp as selected lutemon
+   - user's lutemon always attacks first then opponent's turn to attack
+   - when one of party reached zero health, battle ends and shows brief result in bottom
+   - case of user's lutemon wins, lutemon will get 1 xp (lose no xp gain)
+   - to heal lutemon to maximum level of health, lutemon must be transfered to Home arena
+   - opponent will have maximum health always, when battle starts
+   - ViewModel is used to update lutemon stats before and after training (health and xp)
+   - user can directly move to MainAcitivity and to TransferActivity 
+   - user cannot transfer to other arena in this view
 
 
+### BattleActivity    
 
-    
+![battle1](https://user-images.githubusercontent.com/25344978/233725715-4bf2aec7-8930-4d60-9181-960e0156bcea.png)
+![battle1_result](https://user-images.githubusercontent.com/25344978/233725732-c809063a-adda-4db3-ba92-2452d0e2d1da.png)
+![battle2](https://user-images.githubusercontent.com/25344978/233725752-79ab12d2-a9da-4f81-9556-05e8b07b1692.png)
+![battle2_result](https://user-images.githubusercontent.com/25344978/233725770-47cf7f53-f426-4acc-8521-807c293845be.png)
