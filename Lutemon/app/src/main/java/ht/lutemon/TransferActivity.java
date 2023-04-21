@@ -21,7 +21,7 @@ public class TransferActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     ViewPagerAdapter adapter;
 
-    public static String[] TITLES = new String[] {"HOME", "TRAIN FIELD", "BATTLE FIELD"};
+    public static String[] TITLES = new String[] {"HOME", "TRAIN ARENA", "BATTLE ARENA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +33,20 @@ public class TransferActivity extends AppCompatActivity {
 
         setViewPagerAdapter();
 
-        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(TITLES[position]);
-            }
-        }).attach();
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(TITLES[position])).attach();
     }
 
     public void setViewPagerAdapter() {
         adapter = new ViewPagerAdapter(this);
         ArrayList<Fragment> fragmentList = new ArrayList<>();
 
-        for (int i = 0; i < TITLES.length ; i++) {
-            fragmentList.add(TransferFragment.newInstance(TITLES[i]));
+        for (String title : TITLES) {
+            fragmentList.add(TransferFragment.newInstance(title));
         }
         adapter.setData(fragmentList);
         viewPager.setAdapter(adapter);
     }
-
 
 
     @Override

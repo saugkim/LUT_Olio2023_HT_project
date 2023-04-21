@@ -153,7 +153,8 @@ public class Lutemon implements Cloneable, Serializable {
                         this.team, this.name, opponent.getTeam(), opponent.getName());
 
         int damage = (this.attack + this.xp);
-        opponent.setCurrentHealth(opponent.getCurrentHealth() + opponent.getDefence() - damage);
+        int remainingHealth = Math.max((opponent.getCurrentHealth() + opponent.getDefence() - damage), 0);
+        opponent.setCurrentHealth(remainingHealth);
 
         return ret;
     }

@@ -7,18 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 public class TrainActivity extends AppCompatActivity {
 
@@ -31,7 +27,6 @@ public class TrainActivity extends AppCompatActivity {
     Lutemon[] opponents;
     String selectedLutemonInfo;
     int selectedLutemonId;
-    boolean win = false;
     LutemonViewModel viewModel;
     LutemonRepository repository;
 
@@ -81,17 +76,20 @@ public class TrainActivity extends AppCompatActivity {
             return;
         }
         opponent.setXp(lutemonToTrain.getXp());
+        opponent.setCurrentHealth(opponent.getMaxHealth());
 
         fight(lutemonToTrain, opponent);
     }
 
     private void fight(Lutemon A, Lutemon B) {
         boolean myTurn = true;
+        boolean win = false;
 
         StringBuilder sb = new StringBuilder();
         sb.append(A.shortInfo());
-        sb.append("\n***  train against opponent  ***\n ");
-        sb.append(B.shortInfo());
+        sb.append("\n***  train against  ***\nopponent ");
+        sb.append(String.format(Locale.getDefault(), "[%s] CP %d DP %d HP %d/%d XP %d",
+                B.getTeam(), B.getAttack(), B.getDefence(), B.getCurrentHealth(), B.getMaxHealth(), B.getXp()));
         sb.append("\n\n");
 
         while(true) {
@@ -111,16 +109,16 @@ public class TrainActivity extends AppCompatActivity {
             }
         }
 
-        String result = win ? "YOU WON AND GOT 1 XP\n" : "OPPONENT WON\n";
+        String result = win ? "YOU WON AND GOT 1 XP" : "OPPONENT WON";
         sb.append(result);
+        sb.append("\nTransfer to HOME to heal up lutemon");
 
         textViewResult.setText(sb.toString());
-        if (win){
-            int newXP = A.getXp() + 1;
-            int cHealth = A.getCurrentHealth();
-//            repository.updateXP(selectedLutemonId, newXP);
-            repository.updateXpHp(selectedLutemonId, newXP, cHealth);
-        }
+
+        int newXP = win ? A.getXp() + 1 : A.getXp() ;
+        int cHealth = A.getCurrentHealth();
+        repository.updateXpHp(selectedLutemonId, newXP, cHealth);
+
         reset();
     }
 
@@ -144,7 +142,6 @@ public class TrainActivity extends AppCompatActivity {
         selectedLutemonInfo = null;
         selectedLutemonId = -1;
         opponent = null;
-        win = false;
     }
 
     private void selectLutemonFromRadioGroup() {

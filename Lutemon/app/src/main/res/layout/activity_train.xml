@@ -181,7 +181,8 @@ tools:context=".TrainActivity">
         <TextView
             android:id="@+id/tvTrainResult"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:minHeight="180dp"
             android:background="#F6FAF5"
             android:lineSpacingMultiplier="1.2"
             android:gravity="center"

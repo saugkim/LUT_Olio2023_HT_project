@@ -26,7 +26,7 @@ public class TransferFragment extends Fragment {
 
     private static final String TAG = "ZZ Transfer";
     private static final String ARG_PARAM1 = "param1";
-    static String[] ARENAS = new String[] {"HOME", "TRAIN FIELD", "BATTLE FIELD"};
+    static String[] ARENAS = new String[] {"HOME", "TRAIN ARENA", "BATTLE ARENA"};
     LutemonRepository repository;
     LinearLayout layoutForLutemons;
     RadioGroup radioGroupArena;
@@ -78,7 +78,7 @@ public class TransferFragment extends Fragment {
         radioGroupArena = view.findViewById(R.id.radioGroupField);
         buttonTransfer = view.findViewById(R.id.buttonTransfer);
 
-        createArenaListToTransferInRadioGroup(view);
+        createListOfArenaToTransferInRadioGroup(view);
 
         resetUI();
 
@@ -87,15 +87,27 @@ public class TransferFragment extends Fragment {
         return view;
     }
 
-    /** invoked by buttonTransfer
+    /**
+     * call method to create check-box UI element
+     * be able to select multiple lutemons (no limit)
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        resetUI();
+        createListOfLutemonsInArena(arena);
+    }
+
+    /** invoked by buttonTransfer onClick
      * transfer lutemon from current arena to another
-     * transfer to Home recover current health to max health
+     * transfer to Home lutemon recovers current health to max health
      * @param view
      */
     private void transfer(View view) {
-        String arena = getSelectedArenaToTransfer();
-        if (arena == null) {
-            Toast.makeText(view.getContext(), "Select field first", Toast.LENGTH_LONG).show();
+        String selectedArena = getSelectedArenaToTransfer();
+        if (selectedArena == null) {
+            Toast.makeText(view.getContext(), "Select arena to transfer to", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -107,11 +119,11 @@ public class TransferFragment extends Fragment {
 
         for (int i = 0; i < lutemonIndexes.size(); i++) {
             int index = lutemonIndexes.get(i);
-            repository.updateArena(index, arena.split(" ")[0]);
+            repository.updateArena(index, selectedArena.split(" ")[0]);
 
-            if (arena.equals("HOME")) {
+            if (selectedArena.equals("HOME")) {
                 String HP = lutemonInfoStrings.get(i).split("\\[")[1].split(" ")[6].split("/")[1];
-                repository.updateCurrentHealthToMax(index, Integer.parseInt(HP));
+                repository.updateCurrentHealth(index, Integer.parseInt(HP));
             }
         }
 
@@ -123,13 +135,13 @@ public class TransferFragment extends Fragment {
         cleanLayout();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        resetUI();
-        createListOfLutemonsInArena(arena);
-    }
 
+    /**
+     * it creates list of lutemons in current arena using check-box UI elements
+     * @param field: name of current arena, HOME or TRAIN or BATTLE
+     * ViewModel is used to update information of lutemon (like current Health at Home)
+     * clean up first to remove ghost items (have been transferred to other arena)
+     */
     private void createListOfLutemonsInArena(String field) {
         Log.d(TAG, "getLutemonsInArena: called at onResume() " + field);
         switch (field){
@@ -141,7 +153,7 @@ public class TransferFragment extends Fragment {
                     }
                 });
                 return;
-            case "TRAIN FIELD":
+            case "TRAIN ARENA":
                 viewModel.getTrainLutemons().observe(getViewLifecycleOwner(), listOfLutemons -> {
                     cleanLayout();
                     for (Lutemon lutemon : listOfLutemons) {
@@ -149,7 +161,7 @@ public class TransferFragment extends Fragment {
                     }
                 });
                 return;
-            case "BATTLE FIELD":
+            case "BATTLE ARENA":
                 viewModel.getBattleLutemons().observe(getViewLifecycleOwner(), listOfLutemons -> {
                     cleanLayout();
                     for (Lutemon lutemon : listOfLutemons) {
@@ -161,6 +173,12 @@ public class TransferFragment extends Fragment {
                 break;
         }
     }
+
+    /**
+     * create check-box ui element with lutemon-id and short information
+     * @param info: it has name and color, and basic stats of lutemon, used to set check-box text
+     * @param id: unique lutemon id (given by room-database), used to set check-box id
+     */
     private void addCheckboxElement(String info, int id) {
         if (layoutForLutemons.getChildCount() > 0) {
             for (int i = 0; i < layoutForLutemons.getChildCount(); i++) {
@@ -176,7 +194,12 @@ public class TransferFragment extends Fragment {
         layoutForLutemons.addView(checkBox);
     }
 
-    private void createArenaListToTransferInRadioGroup(View view) {
+    /**
+     * used to create list of arena to transfer to using radio button
+     * list of arena not including current arena
+     * @param view to get context
+     */
+    private void createListOfArenaToTransferInRadioGroup(View view) {
         radioButtons = new ArrayList<>();
         for (String s : ARENAS) {
             if (!s.equals(arena)) {
@@ -188,6 +211,10 @@ public class TransferFragment extends Fragment {
         }
     }
 
+    /**
+     * radioGroup, radio button listener
+     * @return: name of the arena, if selected, null if no selection made
+     */
     private String getSelectedArenaToTransfer() {
         for (RadioButton button : radioButtons) {
             if (button.isChecked()) {
@@ -196,13 +223,21 @@ public class TransferFragment extends Fragment {
         }
         return null;
     }
+
+    /**
+     * check-box listener to get list of selected lutemons
+     * update class variables (arraylist)
+     * id and stats information of selected lutemons
+     */
     private void getSelectedLutemonsToTransfer() {
         lutemonIndexes = new ArrayList<>();
         lutemonInfoStrings = new ArrayList<>();
+
         ArrayList<CheckBox> boxes = new ArrayList<>();
         for (int i = 0; i < layoutForLutemons.getChildCount(); i++) {
             boxes.add((CheckBox) layoutForLutemons.getChildAt(i));
         }
+
         for (CheckBox cb : boxes) {
             if (cb.isChecked()) {
                 Log.d(TAG, "checkBox id: " + cb.getId());
@@ -212,6 +247,9 @@ public class TransferFragment extends Fragment {
         }
     }
 
+    /**
+     * clean up ui-elements (ghost lutemons)
+     */
     private void cleanLayout() {
         if (layoutForLutemons.getChildCount() > 0) {
             for (int i = 0; i < layoutForLutemons.getChildCount(); i++) {

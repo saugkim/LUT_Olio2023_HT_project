@@ -73,7 +73,7 @@ public class LutemonRepository {
         });
     }
 
-    public void updateCurrentHealthToMax(int id, int hp) {
+    public void updateCurrentHealth(int id, int hp) {
         LutemonDatabase.databaseWriteExecutor.execute(()-> {
             dao.updateHealth(id, hp);
         });
