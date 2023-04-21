@@ -102,3 +102,15 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 ### BattleActivity    
 
 
+|Battle1|Result|Battle2|result |
+|-|-|-|-|
+|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233734598-28681c00-6582-4dbd-ae80-dc5340c1cf41.png" width=200> </kbd>|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233734633-c707ba2c-6df0-4ab1-b051-da8c23f2981f.png" width=200> </kbd> |<kbd> <img src="https://user-images.githubusercontent.com/25344978/233734673-476f11c1-ab13-4097-89cf-f37eb87390b9.png" width=200> </kbd>|<kbd> <img src="https://user-images.githubusercontent.com/25344978/233734794-c1229982-61c1-499c-8b38-b965f55f8e77.png" width=200> </kbd>|
+
+  - user selects two lutemons from the list 
+  - it is random which lutemon attacks first against the other 
+  - battle ends one of party lose health completely
+  - winner will get 1 xp, loser will be removed immediately when battle ends (from list and from database)
+  - battle logic is same as train battle
+  - user must transfer lutemon to HOME arena to heal up
+  - battle is based on the text (no graphical implementation)
+  - user can move directly to MainActivity and TransferActivity
