@@ -30,6 +30,20 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 
 ## Implemented features:
 
+|Required| Description |
+|:-|:-|
+|Oilokoodia| Inheritance, encapsulation, singleton |
+|Koodi on englanniksi| coded in english|
+|Ohjelma toimii Androidilla| working only in android device|
+|Ohjelma sisältää perustoiminnallisuuden| I hope so |
+|Extra||
+|RecyclerView| implemented in ListActivity|
+|Satunnaisuus| in fighting algorithm, train and battle |
+|Fragment| TabLayout and ViewPager2 implemented in TransferActivity |
+|Tietojen tallennus ja lataus| RoomDatabase, Dao, repository|
+|ViewModel | update UI |
+
+
 ### MainActivity 
    - 5 buttons to move other 5 acitivies
 
