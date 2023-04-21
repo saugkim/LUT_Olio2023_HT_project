@@ -1,3 +1,7 @@
+## LUT_Olio2023_HT_project
+
+### LUT CT60A2411 Olio-ohjelmointi 2023 spring, harjoitustyö
+
 App: Lutemon v1.0 
 
 Tool: Android studio (Electric Eel 2022.1.1 Patch 1)
