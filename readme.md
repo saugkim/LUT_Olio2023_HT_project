@@ -42,6 +42,7 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 |Ohjelma sisältää perustoiminnallisuuden| I hope so |
 |Extra||
 |RecyclerView| implemented in ListActivity|
+|Lutemoneilla on kuva| very simple ones |
 |Satunnaisuus| in fighting algorithm, train and battle |
 |Fragment| TabLayout and ViewPager2 implemented in TransferActivity |
 |Tietojen tallennus ja lataus| RoomDatabase, Dao, repository|
