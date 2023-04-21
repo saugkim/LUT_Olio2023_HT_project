@@ -9,8 +9,17 @@
         android:title="@string/home"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_sort"
+        android:id="@+id/action_sort_by_COLOR"
         android:orderInCategory="0"
-        android:title="@string/sort"
+        android:title="@string/sort_by_color"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sort_by_XP"
+        android:orderInCategory="0"
+        android:title="@string/sort_by_xp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_deleteAll"
+        android:title="@string/reset_db"
         app:showAsAction="ifRoom" />
 </menu>

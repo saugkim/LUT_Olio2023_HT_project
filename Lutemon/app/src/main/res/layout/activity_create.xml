@@ -142,19 +142,4 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCreate"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnHome"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="#FFEB3B"
-        android:clickable="true"
-        android:contentDescription="@string/content_description"
-        app:backgroundTint="@color/teal_200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="42dp"
-        app:srcCompat="@mipmap/icons8home48" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

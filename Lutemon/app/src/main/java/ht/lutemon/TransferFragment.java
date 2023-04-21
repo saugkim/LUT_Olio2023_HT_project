@@ -26,15 +26,16 @@ public class TransferFragment extends Fragment {
 
     private static final String TAG = "ZZ Transfer";
     private static final String ARG_PARAM1 = "param1";
-    static String[] fields = new String[] {"HOME", "TRAIN FIELD", "BATTLE FIELD"};
+    static String[] ARENAS = new String[] {"HOME", "TRAIN FIELD", "BATTLE FIELD"};
     LutemonRepository repository;
-    LinearLayout linearLayout;
-    RadioGroup radioGroup;
+    LinearLayout layoutForLutemons;
+    RadioGroup radioGroupArena;
     Button buttonTransfer;
-    private String field;
+    private String arena;
 
     ArrayList<RadioButton> radioButtons;
     ArrayList<Integer> lutemonIndexes;
+    ArrayList<String> lutemonInfoStrings;
 
     LutemonViewModel viewModel;
     public TransferFragment() {
@@ -60,87 +61,77 @@ public class TransferFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            field = getArguments().getString(ARG_PARAM1);
+            arena = getArguments().getString(ARG_PARAM1);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         repository = new LutemonRepository(requireActivity().getApplication());
+        viewModel = new LutemonViewModel(requireActivity().getApplication());
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transfer, container, false);
-        linearLayout = view.findViewById(R.id.linearLayoutForList);
-        radioGroup = view.findViewById(R.id.radioGroupField);
+        layoutForLutemons = view.findViewById(R.id.linearLayoutForList);
+        radioGroupArena = view.findViewById(R.id.radioGroupField);
         buttonTransfer = view.findViewById(R.id.buttonTransfer);
 
-        viewModel = new LutemonViewModel(requireActivity().getApplication());
+        createArenaListToTransferInRadioGroup(view);
 
-        addRadioButton(view);
         resetUI();
-        cleanLayout();
 
-//        ArrayList<Lutemon> mons = getListOfLutemonInThisField(field);
-//        for (Lutemon lutemon : mons) {
-//            addCheckboxElement(lutemon.shortInfo(), view);
-//        }
-
-        buttonTransfer.setOnClickListener(v-> {
-            String arena = getArena();
-            if (arena == null) {
-                Toast.makeText(v.getContext(), "Select field first", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            getSelectedLutemons();
-            if (lutemonIndexes.size() == 0) {
-                Toast.makeText(v.getContext(), "Select lutemons first", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            for (Integer index : lutemonIndexes) {
-                repository.updateArena(index, arena.split(" ")[0]);
-            }
-            resetUI();
-        });
+        buttonTransfer.setOnClickListener(this::transfer);
 
         return view;
     }
 
-    private void resetUI() {
-        for (RadioButton rb : radioButtons) {
-            rb.setChecked(false);
+    /** invoked by buttonTransfer
+     * transfer lutemon from current arena to another
+     * transfer to Home recover current health to max health
+     * @param view
+     */
+    private void transfer(View view) {
+        String arena = getSelectedArenaToTransfer();
+        if (arena == null) {
+            Toast.makeText(view.getContext(), "Select field first", Toast.LENGTH_LONG).show();
+            return;
         }
 
-        if (linearLayout.getChildCount() > 0) {
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                CheckBox cb = (CheckBox) linearLayout.getChildAt(i);
-                cb.setChecked(false);
+        getSelectedLutemonsToTransfer();
+        if (lutemonIndexes.size() == 0) {
+            Toast.makeText(view.getContext(), "Lutemon not selected", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        for (int i = 0; i < lutemonIndexes.size(); i++) {
+            int index = lutemonIndexes.get(i);
+            repository.updateArena(index, arena.split(" ")[0]);
+
+            if (arena.equals("HOME")) {
+                String HP = lutemonInfoStrings.get(i).split("\\[")[1].split(" ")[6].split("/")[1];
+                repository.updateCurrentHealthToMax(index, Integer.parseInt(HP));
             }
         }
-        cleanLayout();
+
+        resetUI();
     }
 
-    private void cleanLayout() {
-        if (linearLayout.getChildCount() > 0) {
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                linearLayout.removeView(linearLayout.getChildAt(i));
-            }
-        }
+    private void resetUI() {
+        radioGroupArena.clearCheck();
+        cleanLayout();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume");
         resetUI();
-        getLutemonsInArena(field);
+        createListOfLutemonsInArena(arena);
     }
 
-    private void getLutemonsInArena(String field) {
-
-        Log.d(TAG, "getLutemonsInArena: onStart only " + field);
+    private void createListOfLutemonsInArena(String field) {
+        Log.d(TAG, "getLutemonsInArena: called at onResume() " + field);
         switch (field){
             case "HOME":
                 viewModel.getHomeLutemons().observe(getViewLifecycleOwner(), listOfLutemons -> {
@@ -171,25 +162,33 @@ public class TransferFragment extends Fragment {
         }
     }
     private void addCheckboxElement(String info, int id) {
+        if (layoutForLutemons.getChildCount() > 0) {
+            for (int i = 0; i < layoutForLutemons.getChildCount(); i++) {
+                CheckBox cb = (CheckBox) layoutForLutemons.getChildAt(i);
+                if (cb.getId() == id)
+                    layoutForLutemons.removeView(cb);
+            }
+        }
+
         CheckBox checkBox = new CheckBox(getContext());
         checkBox.setText(info);
         checkBox.setId(id);
-        linearLayout.addView(checkBox);
+        layoutForLutemons.addView(checkBox);
     }
 
-    private void addRadioButton(View view) {
+    private void createArenaListToTransferInRadioGroup(View view) {
         radioButtons = new ArrayList<>();
-        for (String s : fields) {
-            if (!s.equals(field)) {
+        for (String s : ARENAS) {
+            if (!s.equals(arena)) {
                 RadioButton button = new RadioButton(view.getContext());
                 button.setText(s.toLowerCase());
-                radioGroup.addView(button);
+                radioGroupArena.addView(button);
                 radioButtons.add(button);
             }
         }
     }
 
-    private String getArena () {
+    private String getSelectedArenaToTransfer() {
         for (RadioButton button : radioButtons) {
             if (button.isChecked()) {
                 return button.getText().toString().toUpperCase();
@@ -197,33 +196,27 @@ public class TransferFragment extends Fragment {
         }
         return null;
     }
-    private void getSelectedLutemons () {
+    private void getSelectedLutemonsToTransfer() {
         lutemonIndexes = new ArrayList<>();
+        lutemonInfoStrings = new ArrayList<>();
         ArrayList<CheckBox> boxes = new ArrayList<>();
-        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-            boxes.add((CheckBox) linearLayout.getChildAt(i));
+        for (int i = 0; i < layoutForLutemons.getChildCount(); i++) {
+            boxes.add((CheckBox) layoutForLutemons.getChildAt(i));
         }
         for (CheckBox cb : boxes) {
             if (cb.isChecked()) {
                 Log.d(TAG, "checkBox id: " + cb.getId());
                 lutemonIndexes.add(cb.getId());
+                lutemonInfoStrings.add(cb.getText().toString());
             }
         }
     }
 
-    //will be deleted soon
-    public ArrayList<Lutemon> getListOfLutemonInThisField(String field) {
-        ArrayList<Lutemon> lutemons = new ArrayList<>();
-        switch (field) {
-            case "HOME":
-                return LutemonStorage.getInstance().getLutemonsAtHome();
-            case "TRAIN FIELD":
-                return LutemonStorage.getInstance().getLutemonsInTrain();
-            case "BATTLE FIELD":
-                return LutemonStorage.getInstance().getLutemonsInBattles();
-            default:
-                return lutemons;
+    private void cleanLayout() {
+        if (layoutForLutemons.getChildCount() > 0) {
+            for (int i = 0; i < layoutForLutemons.getChildCount(); i++) {
+                layoutForLutemons.removeView(layoutForLutemons.getChildAt(i));
+            }
         }
     }
-
 }

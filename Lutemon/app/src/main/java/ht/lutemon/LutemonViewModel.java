@@ -11,9 +11,6 @@ import java.util.List;
 public class LutemonViewModel extends AndroidViewModel {
 
     private final LiveData<List<Lutemon>> allLutemons;
-    private final LiveData<List<Lutemon>> homeLutemons;
-    private final LiveData<List<Lutemon>> trainLutemons;
-    private final LiveData<List<Lutemon>> battleLutemons;
 
     LiveData<Integer> total_number;
     LutemonRepository repository;
@@ -24,9 +21,6 @@ public class LutemonViewModel extends AndroidViewModel {
         repository = new LutemonRepository(application);
         allLutemons = repository.getAllLutemons();
         total_number = repository.getCounts();
-        homeLutemons = repository.homeLutemons;
-        trainLutemons = repository.getTrainLutemons();
-        battleLutemons = repository.getBattleLutemons();
     }
 
     public LiveData<Lutemon> getLutemonById(int id) {
@@ -35,7 +29,14 @@ public class LutemonViewModel extends AndroidViewModel {
     public LiveData<List<Lutemon>> getAllLutemons() {
         return allLutemons;
     }
-    public LiveData<List<Lutemon>> getHomeLutemons() { return homeLutemons; }
-    public LiveData<List<Lutemon>> getBattleLutemons() { return battleLutemons; }
-    public LiveData<List<Lutemon>> getTrainLutemons() { return trainLutemons; }
+    public LiveData<List<Lutemon>> getHomeLutemons() { return repository.getHomeLutemons(); }
+    public LiveData<List<Lutemon>> getBattleLutemons() { return repository.getBattleLutemons(); }
+    public LiveData<List<Lutemon>> getTrainLutemons() { return repository.getTrainLutemons(); }
+
+    public LiveData<List<Lutemon>> getSortedByColor() {
+        return repository.getSortedByColor();
+    }
+    public LiveData<List<Lutemon>> getSortedByXP() {
+        return repository.getSortedByXp();
+    }
 }

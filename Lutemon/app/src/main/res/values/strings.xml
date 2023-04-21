@@ -21,4 +21,14 @@
     <string name="start_train">start train</string>
     <string name="default_message_for_train">start train and see the result here</string>
     <string name="default_message_for_battle">please select lutemons and start battle!!</string>
+    <string name="select_a_lutemon_to_train">Select a lutemon to train</string>
+    <string name="reset_db">RESET DB</string>
+    <string name="sort_by_color">SORT BY COLOR</string>
+    <string name="sort_by_xp">SORT BY XP</string>
+    <string name="select_an_opponent_to_train_with">Select an opponent to train with</string>
+    <string name="select_orange_lutemon">select orange lutemon</string>
+    <string name="select_black_lutemon">select black lutemon</string>
+    <string name="select_pink_lutemon">select pink lutemon</string>
+    <string name="select_green_lutemon">select green lutemon</string>
+    <string name="select_white_lutemon">select white lutemon</string>
 </resources>

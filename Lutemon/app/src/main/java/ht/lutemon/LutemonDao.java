@@ -45,8 +45,20 @@ public interface LutemonDao {
     @Query("UPDATE lutemons SET xp = :newXp, currentHealth = :newCurrentHealth WHERE id = :id")
     void updateXpHp(int id, int newXp, int newCurrentHealth);
 
+    @Query("UPDATE lutemons SET currentHealth = :fullHealth WHERE id = :id")
+    void updateHealth(int id, int fullHealth);
+
     @Update
     void update(Lutemon lutemon);
+
     @Query("SELECT * FROM lutemons WHERE id = :id")
     LiveData<Lutemon> getLutemonById(int id);
+
+    @Query("SELECT * FROM lutemons ORDER BY xp DESC")
+    LiveData<List<Lutemon>> getLutemonsSortedByXP();
+
+    @Query("SELECT * FROM lutemons ORDER BY defence DESC, xp DESC")
+    LiveData<List<Lutemon>> getLutemonsSortedByColors();
+
+
 }

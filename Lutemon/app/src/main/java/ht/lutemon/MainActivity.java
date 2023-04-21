@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         buttonBattle = findViewById(R.id.buttonBattle);
         buttonList = findViewById(R.id.buttonList);
 
-        //buttonBattle.setOnClickListener(v->LutemonStorage.getInstance().removeAll());
         buttonBattle.setOnClickListener(v-> startActivity(new Intent(this, BattleActivity.class)));
         buttonCreate.setOnClickListener(v-> startActivity(new Intent(this, CreateActivity.class)));
         buttonTrain.setOnClickListener(v->startActivity(new Intent(this, TrainActivity.class)));

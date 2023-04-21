@@ -2,6 +2,7 @@ package ht.lutemon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ipsec.ike.exceptions.InvalidMajorVersionException;
@@ -18,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class CreateActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     Button buttonCreate;
     EditText editText;
-    FloatingActionButton fab;
+
     ImageView imageViewForTest;
 
     @Override
@@ -38,11 +40,10 @@ public class CreateActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroup);
         buttonCreate = findViewById(R.id.btnCreate);
         editText = findViewById(R.id.etName);
-        fab = findViewById(R.id.btnHome);
+
         imageViewForTest = findViewById(R.id.imageViewTemp);
 
         buttonCreate.setOnClickListener(v-> create());
-        fab.setOnClickListener(v-> startActivity(new Intent(this, MainActivity.class)));
     }
 
     private void create() {
@@ -55,7 +56,7 @@ public class CreateActivity extends AppCompatActivity {
             buttons.add((RadioButton) radioGroup.getChildAt(i));
         }
 
-        for (int i=0; i<buttons.size();i++) {
+        for (int i=0; i < buttons.size();i++) {
             if (buttons.get(i).isChecked()) {
                 lutemon = createLutemon(i);
             }
@@ -63,45 +64,36 @@ public class CreateActivity extends AppCompatActivity {
 
         if (lutemon == null)
             return;
+
         if (!name.isEmpty()) {
             lutemon.setName(name);
         }
 
-        LutemonStorage.getInstance().addLutemon(lutemon);
+//        imageViewForTest.setImageResource(lutemon.getImageSource());
+//        imageViewForTest.setBackgroundColor(lutemon.getBackground_color());
 
-        imageViewForTest.setImageResource(lutemon.getImageSource());
-        imageViewForTest.setBackgroundColor(lutemon.getBackground_color());
+        new LutemonRepository(getApplication()).insert(lutemon);
+        Snackbar.make(getWindow().getDecorView(), "New Lutemon: " + lutemon.getName() + " was created", Snackbar.LENGTH_SHORT).show();
 
-        //LutemonStorage.getInstance().save(this);
-
-        LutemonRepository repository = new LutemonRepository(getApplication());
-        repository.insert(lutemon);
-        Log.d(TAG, "inserted: " + lutemon.getId());
+        radioGroup.clearCheck();
+        editText.getText().clear();
     }
 
-    private Lutemon createLutemon(int index) {
-        Lutemon lutemon;
-        switch (index) {
+    private Lutemon createLutemon(int teamId) {
+        switch (teamId) {
             case 0:
-                lutemon = new White();
-                break;
+                return new White();
             case 1:
-                lutemon = new Green();
-                break;
+                return new Green();
             case 2:
-                lutemon = new Pink();
-                break;
+                return new Pink();
             case 3:
-                lutemon = new Orange();
-                break;
+                return new Orange();
             case 4:
-                lutemon = new Black();
-                break;
+                return new Black();
             default:
-                lutemon = null;
-                break;
+                return null;
         }
-        return lutemon;
     }
 
 
@@ -112,9 +104,6 @@ public class CreateActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         if (id == R.id.action_home) {

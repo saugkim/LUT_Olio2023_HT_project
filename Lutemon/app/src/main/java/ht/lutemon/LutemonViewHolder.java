@@ -26,6 +26,7 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
     static String TAG = "ZZ LutemonViewHolder";
     LutemonRepository repository;
+
     public LutemonViewHolder(@NonNull View itemView) {
         super(itemView);
         layout = (LinearLayout) itemView.findViewById(R.id.layout_for_lutemon);
@@ -34,20 +35,32 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
         repository = new LutemonRepository(((Activity) itemView.getContext()).getApplication());
 
-        itemView.setOnLongClickListener(v->{
-            repository.delete(mLutemon);
-//           LutemonStorage.getInstance().removeLutemon(mLutemon);
-//           Helper.save(v.getContext());
-           return true;
+        itemView.setOnLongClickListener(v-> {
+            delete(v.getContext());
+            return true;
         });
 
-        itemView.setOnClickListener(v-> {
-            edit(v.getContext());
-        });
+        itemView.setOnClickListener(v-> edit(v.getContext()));
     }
 
+    /** invoked by long-click item view from recyclerView
+     * this method will delete current record (lutemon) from database
+     * @param context to build AlertDialog
+     */
+    private void delete(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("This action will remove this recode (lutemon) permanently.");
+        builder.setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("CONFIRM", (dialog, which) -> repository.delete(mLutemon));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    /** invoked by clicking item view from recyclerView
+     * this method will update name of lutemon
+     * @param context to build AlertDialog
+     */
     public void edit(Context context) {
-        LutemonRepository repository = new LutemonRepository(((Activity) context).getApplication());
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         // Get the layout inflater and inflate and set layout for dialog
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,15 +72,14 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
                 .setPositiveButton("UPDATE", (dialog, which) -> {
                     String text = editText.getText().toString();
                     if (!text.isEmpty()) {
-                        Log.d(TAG, "dialog open: " + text);
                         mLutemon.setName(text);
                         repository.update(mLutemon);
                     }
                     dialog.dismiss();
                 });
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void bind(Lutemon lutemon) {

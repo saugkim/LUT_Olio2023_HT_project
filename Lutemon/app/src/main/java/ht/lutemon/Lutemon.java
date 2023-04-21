@@ -123,8 +123,8 @@ public class Lutemon implements Cloneable, Serializable {
 
     public String shortInfo() {
         return String.format(Locale.getDefault(),
-                "%s [%s] CP: %d DP: %d HP: %d/%d XP: %d",
-                 name, team.toUpperCase(), attack, defence, currentHealth, maxHealth, xp);
+                "%s [%s] CP %d DP %d HP %d/%d XP %d",
+                 name, team, attack, defence, currentHealth, maxHealth, xp);
     }
 
     @NonNull

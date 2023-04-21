@@ -9,6 +9,7 @@ import java.util.List;
 public class LutemonRepository {
 
     static String TAG = "ZZ LutemonRepository";
+    private static final String SEPARATOR = "\\[";
     LutemonDao dao;
 
     LiveData<List<Lutemon>> lutemons;
@@ -37,11 +38,16 @@ public class LutemonRepository {
         return battleLutemons;
     }
 
+    public LiveData<List<Lutemon>> getSortedByColor() {
+        return dao.getLutemonsSortedByColors();
+    }
+    public LiveData<List<Lutemon>> getSortedByXp() {
+        return dao.getLutemonsSortedByXP();
+    }
+
     public void insert(Lutemon lutemon) {
         LutemonDatabase.databaseWriteExecutor.execute(()-> {
             dao.insert(lutemon);
-//            int id = (int) dao.insert(lutemon);
-//            lutemon.setId(id);
         });
     }
 
@@ -67,6 +73,12 @@ public class LutemonRepository {
         });
     }
 
+    public void updateCurrentHealthToMax(int id, int hp) {
+        LutemonDatabase.databaseWriteExecutor.execute(()-> {
+            dao.updateHealth(id, hp);
+        });
+    }
+
     public void updateXpHp(int id, int xp, int hp) {
         LutemonDatabase.databaseWriteExecutor.execute(() -> {
             dao.updateXpHp(id, xp, hp);
@@ -86,5 +98,43 @@ public class LutemonRepository {
 
     public LiveData<Integer> getCounts() {
         return dao.getCounts();
+    }
+
+    public Lutemon getCloned(String lutemonInfoString) {
+        Lutemon cloned;
+        if (lutemonInfoString == null) {
+            return null;
+        }
+
+        String name = lutemonInfoString.split(SEPARATOR)[0].trim();
+        String[] stats = lutemonInfoString.split(SEPARATOR)[1].split(" ");
+        String team = stats[0];
+        int xp = Integer.parseInt(stats[8]);
+        int cHealth = Integer.parseInt(stats[6].split("/")[0]);
+
+        switch (team) {
+            case "White]":
+                cloned = new White();
+                break;
+            case "Green]":
+                cloned = new Green();
+                break;
+            case "Pink]":
+                cloned = new Pink();
+                break;
+            case "Orange]":
+                cloned = new Orange();
+                break;
+            case "Black]":
+                cloned = new Black();
+                break;
+            default:
+                cloned = new Lutemon();
+                break;
+        }
+        cloned.setName(name);
+        cloned.setXp(xp);
+        cloned.setCurrentHealth(cHealth);
+        return cloned;
     }
 }
