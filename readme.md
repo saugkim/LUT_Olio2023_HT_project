@@ -49,6 +49,13 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 |ViewModel | update UI |
 
 
+### Class diagram
+
+<kbd> <img src="https://user-images.githubusercontent.com/25344978/233769887-8aa4f8b1-8350-4d8f-ade6-5e3b87702e84.png" width=600> </kbd>
+
+<br>
+
+
 ### MainActivity 
    - 5 buttons to move other 5 acitivies
 
