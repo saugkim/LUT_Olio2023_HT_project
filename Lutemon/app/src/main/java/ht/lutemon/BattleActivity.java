@@ -53,6 +53,12 @@ public class BattleActivity extends AppCompatActivity {
         startBattleButton.setOnClickListener(this::startBattle);
     }
 
+    /**
+     * start battle
+     * check selected lutemons, checkbox
+     * clone lutemons and start to fight
+     * @param view
+     */
     private void startBattle(View view) {
         resultBattleView.setText(R.string.default_message_for_battle);
         selectLutemonsToFightEachOther();
@@ -75,6 +81,19 @@ public class BattleActivity extends AppCompatActivity {
         fight(A, B);
         reset();
     }
+
+    /**
+     * fight algorithm while loop (basically change turn with boolean)
+     * @param A one of selected lutemons to fight each other
+     * @param B the other one order of id
+     * random start between A and B
+     * take a turn for each attack
+     * there is chance to attack again after attack
+     * currently 10% probability to continue own attack
+     *
+     * winner update stats with increased xp and remaining health point
+     * loser will be removed from database completely, ghost ui element will be removed
+     */
     private void fight(Lutemon A, Lutemon B) {
 
         final Random random = new Random();
@@ -89,7 +108,13 @@ public class BattleActivity extends AppCompatActivity {
             if (onQueue) {
                 String ret = A.attack(B);
                 sb.append(ret);
-                onQueue = false;
+
+                if ( (random.nextInt() % 10) == 7) {
+                    sb.append("\nYOU GOT DOUBLE ATTACK\n");
+                } else {
+                    onQueue = false;
+                }
+
                 if (B.getCurrentHealth() <= 0) {
                     sb.append(String.format(Locale.getDefault(),
                             "%s(%s) is dead.\n\n", B.getTeam(), B.getName()));
@@ -101,7 +126,13 @@ public class BattleActivity extends AppCompatActivity {
             } else {
                 String ret = B.attack(A);
                 sb.append(ret);
-                onQueue = true;
+
+                if ( (random.nextInt() % 10) == 7) {
+                    sb.append("\nYOU GOT DOUBLE ATTACK\n");
+                } else {
+                    onQueue = true;
+                }
+
                 if(A.getCurrentHealth() <= 0) {
                     sb.append(String.format(Locale.getDefault(),
                             "%s(%s) is dead.\n\n", A.getTeam(), A.getName()));
@@ -131,6 +162,10 @@ public class BattleActivity extends AppCompatActivity {
         repository.deleteById(loser.getId());
     }
 
+    /**
+     * reset ui after fighting starts,
+     * result-text will remain until another match is completed
+     */
     private void reset() {
         for (int i = 0; i < layoutForCheckBoxes.getChildCount(); i++) {
             CheckBox cb = (CheckBox) layoutForCheckBoxes.getChildAt(i);
@@ -139,6 +174,12 @@ public class BattleActivity extends AppCompatActivity {
         selectedInfo = new ArrayList<>();
         selectedIndexes = new ArrayList<>();
     }
+
+    /**
+     * create check box element for each lutemon in the list dynamically
+     * @param info: lutemon's short info, used to setText of ui
+     * @param id: lutemon id (given by database as primary key), used to setId of ui
+     */
     private void createCheckBox(String info, int id){
         for (int i = 0; i < layoutForCheckBoxes.getChildCount(); i++) {
             CheckBox cb = (CheckBox) layoutForCheckBoxes.getChildAt(i);
@@ -152,6 +193,11 @@ public class BattleActivity extends AppCompatActivity {
         layoutForCheckBoxes.addView(cb);
     }
 
+    /**
+     * user selection listener
+     * id and text of selected checkboxes are saved into arraylist
+     * they are used to clone lutemons to fight each other
+     */
     private void selectLutemonsToFightEachOther() {
         for (int i = 0; i < layoutForCheckBoxes.getChildCount(); i++) {
             CheckBox cb = (CheckBox) layoutForCheckBoxes.getChildAt(i);
@@ -181,44 +227,5 @@ public class BattleActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-
-    //deleting
-    private Lutemon getCloned(String infoText) {
-        Lutemon lutemon;
-        if (infoText == null) {
-            return null;
-        }
-        String name = infoText.split("\\[")[0].trim();
-        String[] stats = infoText.split("\\[")[1].split(" ");
-        String team = stats[0];
-        int xp = Integer.parseInt(stats[8]);
-        int cHealth = Integer.parseInt(stats[6].split("/")[0]);
-
-        switch (team) {
-            case "WHITE]":
-                lutemon = new White();
-                break;
-            case "GREEN]":
-                lutemon = new Green();
-                break;
-            case "PINK]":
-                lutemon = new Pink();
-                break;
-            case "ORANGE]":
-                lutemon = new Orange();
-                break;
-            case "BLACK]":
-                lutemon = new Black();
-                break;
-            default:
-                lutemon = new Lutemon();
-                break;
-        }
-        lutemon.setName(name);
-        lutemon.setXp(xp);
-        lutemon.setCurrentHealth(cHealth);
-        return lutemon;
     }
 }
