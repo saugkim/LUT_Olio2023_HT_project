@@ -34,18 +34,18 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 
 ## Implemented features:
 
-|Required| Description |
+|Required features||
 |:-|:-|
-|Oilokoodia| Inheritance, encapsulation, singleton |
+|Oilokoodia| Inheritance, encapsulation |
 |Koodi on englanniksi| coded in english|
-|Ohjelma toimii Androidilla| working only in android device|
+|Ohjelma toimii Androidilla| app is working only in android device|
 |Ohjelma sisältää perustoiminnallisuuden| I hope so |
-|Extra||
-|RecyclerView| implemented in ListActivity|
+|**Extra features**||
+|RecyclerView| implemented in ListActivity |
 |Lutemoneilla on kuva| very simple ones |
-|Satunnaisuus| in fighting algorithm, train and battle |
-|Fragment| TabLayout and ViewPager2 implemented in TransferActivity |
-|Tietojen tallennus ja lataus| RoomDatabase, Dao, repository|
+|Satunnaisuus| fighting algorithm in battle, 10 % chance to continue own attack |
+|Fragment| TabLayout and ViewPager2, implemented in TransferActivity |
+|Tietojen tallennus ja lataus| RoomDatabase, Dao|
 |ViewModel | update UI |
 
 
@@ -127,9 +127,10 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 
   - user selects two lutemons from the list 
   - it is random which lutemon attacks first against the other 
+  - there is slight chance to continue attack (10%) after attack was done 
   - battle ends one of party lose health completely
-  - winner will get 1 xp, loser will be removed immediately when battle ends (from list and from database)
-  - battle logic is same as train battle
+  - winner will get 1 xp 
+  - loser will be removed immediately (from ui and from database)
   - user must transfer lutemon to HOME arena to heal up
-  - battle is based on the text (no graphical implementation)
+  - battle is based on the text (NO visuallyzation with graphic)
   - user can move directly to MainActivity and TransferActivity
