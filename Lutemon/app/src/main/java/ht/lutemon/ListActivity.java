@@ -17,7 +17,6 @@ public class ListActivity extends AppCompatActivity {
     LutemonListAdapter listAdapter;
     LutemonViewModel viewModel;
 
-    boolean isSorted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

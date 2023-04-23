@@ -66,6 +66,11 @@ public class TrainActivity extends AppCompatActivity {
         startTrainButton.setOnClickListener(this::startTrain);
     }
 
+    /**
+     * null check of selected lutemon and opponent
+     * if everything is fine, start to fight
+     * @param view: for Snackbar...
+     */
     private void startTrain(View view){
         selectOpponent();
         selectLutemonFromRadioGroup();
@@ -81,6 +86,19 @@ public class TrainActivity extends AppCompatActivity {
         fight(lutemonToTrain, opponent);
     }
 
+    /**
+     * fight algorithm, same as battle,
+     * but here no random start or no multiple attack
+     * opponent lutemon has same level of xp as user lutemon
+     * opponent has full health at begin
+     * user lutemon attacks first
+     * if user lutemon won, get 1 extra xp, no xp gain from losing
+     * update lutemon with new stats (xp and currentHealth)
+     * show result in text field
+     * user need to transfer lutemon to home arena to heal up
+     * @param A: user lutemon
+     * @param B: opponent lutemon
+     */
     private void fight(Lutemon A, Lutemon B) {
         boolean myTurn = true;
         boolean win = false;
@@ -122,6 +140,12 @@ public class TrainActivity extends AppCompatActivity {
         reset();
     }
 
+    /**
+     * create UI element for lutemons in train arena
+     * set ui is same as lutemon id and ui text is lutemon short info
+     * @param info: lutemon short info
+     * @param id: lutemon unique id
+     */
     private void createRadioButtons(String info, int id) {
         for (int i=0; i<radioGroupTrain.getChildCount();i++){
             RadioButton rb = (RadioButton) radioGroupTrain.getChildAt(i);
@@ -144,6 +168,11 @@ public class TrainActivity extends AppCompatActivity {
         opponent = null;
     }
 
+    /**
+     * user select lutemon using radio group
+     * index and info from selected ui element
+     * these are used to clone lutemon
+     */
     private void selectLutemonFromRadioGroup() {
         for (int i=0; i<radioGroupTrain.getChildCount();i++) {
             RadioButton rbButton = (RadioButton) radioGroupTrain.getChildAt(i);
@@ -154,6 +183,9 @@ public class TrainActivity extends AppCompatActivity {
         }
    }
 
+    /**
+     * user selects opponent using radio group (color)
+     */
     private void selectOpponent() {
         for (int i = 0; i < radioButtonOpponents.length; i++) {
             if (radioButtonOpponents[i].isChecked()) {

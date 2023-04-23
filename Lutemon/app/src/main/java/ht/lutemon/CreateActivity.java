@@ -30,8 +30,6 @@ public class CreateActivity extends AppCompatActivity {
     Button buttonCreate;
     EditText editText;
 
-    ImageView imageViewForTest;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +39,15 @@ public class CreateActivity extends AppCompatActivity {
         buttonCreate = findViewById(R.id.btnCreate);
         editText = findViewById(R.id.etName);
 
-        imageViewForTest = findViewById(R.id.imageViewTemp);
-
         buttonCreate.setOnClickListener(v-> create());
     }
 
+    /**
+     * create new lutemon object based on the user input
+     * user must select a type (color) and
+     * user can give custom name if user wants at this stage
+     * successfully created object will be inserted into database
+     */
     private void create() {
         Lutemon lutemon = null;
         String name = editText.getText().toString();
@@ -69,9 +71,6 @@ public class CreateActivity extends AppCompatActivity {
             lutemon.setName(name);
         }
 
-//        imageViewForTest.setImageResource(lutemon.getImageSource());
-//        imageViewForTest.setBackgroundColor(lutemon.getBackground_color());
-
         new LutemonRepository(getApplication()).insert(lutemon);
         Snackbar.make(getWindow().getDecorView(), "New Lutemon: " + lutemon.getName() + " was created", Snackbar.LENGTH_SHORT).show();
 
@@ -79,6 +78,10 @@ public class CreateActivity extends AppCompatActivity {
         editText.getText().clear();
     }
 
+    /**
+     * @param teamId: teamId is radio-button array index
+     * @return lutemon type (color)
+     */
     private Lutemon createLutemon(int teamId) {
         switch (teamId) {
             case 0:
