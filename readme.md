@@ -51,9 +51,9 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
 
 ## Class diagram
 
-<kbd> <img src="https://user-images.githubusercontent.com/25344978/233769887-8aa4f8b1-8350-4d8f-ade6-5e3b87702e84.png" width=600> </kbd>
+<kbd> <img src="https://user-images.githubusercontent.com/25344978/235469448-3f3b2ad8-cd5a-4779-9f6e-857ac6237179.png" width=500> </kbd>
 
-   - No separate storage or child class for arena
+   - There is no child classes for storage (LutemonRepository only)!!
    - One table in Room Database is located inside app (internal) 
    - ViewModel is used for List, Transfer, Train and Battle Acitivies
 
@@ -124,8 +124,8 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
    - to heal lutemon to maximum level of health, lutemon must be transfered to Home arena
    - opponent will have maximum health always, when battle starts
    - ViewModel is used to update lutemon stats before and after training (health and xp)
-   - user can directly move to MainAcitivity and to TransferActivity 
-   - user cannot transfer to other arena in this view
+   - user can directly go to MainAcitivity and TransferActivity 
+   - user cannot transfer lutemon to other arena in this view
 
 
 
@@ -143,5 +143,5 @@ https://user-images.githubusercontent.com/25344978/233713590-b9f00b38-1fc5-44ac-
   - winner will get 1 xp 
   - loser will be removed immediately (from ui and from database)
   - user must transfer lutemon to HOME arena to heal up
-  - battle is based on the text (NO visuallyzation with graphic)
-  - user can move directly to MainActivity and TransferActivity
+  - battle result is shown as plain text (NO graphics used)
+  - user can go directly to MainActivity and TransferActivity
